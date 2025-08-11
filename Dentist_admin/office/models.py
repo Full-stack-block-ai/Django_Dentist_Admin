@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.validators import MaxValueValidator,MinValueValidator
 
 # Create your models here.
 # Define a new class named 'Patient' that inherits from models.Model.
@@ -8,7 +9,8 @@ from django.db import models
 class  Patient(models.Model):
     first_name = models.CharField(max_length=30)
     last_name = models.CharField(max_length=30)
-    age = models.IntegerField()
+    age = models.IntegerField(validators=[MinValueValidator(0),MaxValueValidator(120)])
+    heart_rate = models.IntegerField(default=60,validators=[MinValueValidator(1),MaxValueValidator(250)])
 
     def __str__(self):
 
